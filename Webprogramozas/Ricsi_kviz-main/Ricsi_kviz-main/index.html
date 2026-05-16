@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Kvíz játék</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<h1>🔥 Ivós játék 🔥</h1>
+
+<div>
+    <input type="text" id="playerName" placeholder="Játékos neve">
+    <button type="button" onclick="addPlayer()">➕ Hozzáadás</button>
+</div>
+
+<div id="players"></div>
+
+<br>
+<button onclick="startGame()">🚀 Játék indítása</button>
+<button onclick="ujKor()">❓ Kérdés</button>
+<button onclick="flipKartya()">💀 Büntetés</button>
+<button onclick="keveres()">🔀 Keverés</button>
+
+<div id="output"></div>
+
+<div class="card" id="card">
+    <div class="card-inner">
+        <div class="card-front" id="kerdesText">Kezdjük!</div>
+        <div class="card-back" id="buntetesText">💀</div>
+    </div>
+</div>
+
+<audio id="flipSound" src="Flip Card SOUND Effect.mp3"></audio>
+
+<div class="wheel-container">
+    <div class="wheel-pointer"></div>
+    <canvas id="wheel" width="400" height="400"></canvas>
+</div>
+<button onclick="spinWheel()">🎯 Pörgesd a kereket</button>
+
+<p class="bal-alul">© 2026 Katona Márk</p>
+
+<script src="kviz.js"></script>
+</body>
+</html>

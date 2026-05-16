@@ -1,0 +1,150 @@
+body {
+    background-color: pink;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+h1{
+    margin-bottom: 30px;
+    font-size: clamp(2.2rem, 8vw, 5rem);
+}
+
+
+.container {
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.buttons button{
+    font-size: 20px;
+    padding: 10px 25px;
+    cursor:pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buttons button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.buttons button:first-child{
+    animation: pulse 1.5s infinite;
+}
+
+
+.buttons{
+    display: flex;
+    gap: 15px;
+}
+
+
+.heart{
+    position:absolute;
+    font-size:24px;
+    color: red;
+    animation: floatUp 2s ease-out forwards;
+    pointer-events: none;
+}
+
+
+#jumpHeart{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+
+    z-index: 1000;
+    margin-left: 10px;
+    font-size: min(60vw, 300px);
+
+    
+}
+
+.jump{
+    animation: jumpScare 0.5s ease-out forwards;
+}
+
+
+@keyframes fadeIn{
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes floatUp{
+    0%{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100%{
+        opacity: 0;
+        transform: translateY(-100px) scale(1.5);
+    }
+}
+
+@keyframes jumpScare{
+    0%{
+        transform: translate(-50%, -50%) scale(0);
+    }
+    70%{
+        transform: translate(-50%, -50%) scale(1.8);
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .buttons button {
+        width: 200px;
+        font-size: 18px;
+        padding: 12px 0;
+    }
+
+    .heart {
+        font-size: 20px;
+    }
+}
+
+@media (hover: hover) {
+    .buttons button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+}

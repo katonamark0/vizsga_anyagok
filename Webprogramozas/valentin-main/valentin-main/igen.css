@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: pink;
+    font-family: Arial, sans-serif;
+    font-size: 60px;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.szoveg{
+    text-align: center;
+}
+
+.main{
+    font-size: 80px; 
+    font-weight: bold;
+}
+
+.sub3{
+    margin-top: 10px;
+    font-size: 36px;
+    opacity: 0.8;
+}

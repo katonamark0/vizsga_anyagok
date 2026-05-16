@@ -1,0 +1,231 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fdecef;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  padding: 16px;
+}
+
+h2{
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(22px, 5vw, 50px);
+  color: #ff4fa3;
+  z-index: 3;
+  animation-delay: 5s;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Szöveg */
+.text {
+  font-size: clamp(22px, 5vw, 50px);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  animation-delay: 4s;
+}
+
+.text1 {
+  font-size: clamp(22px, 5vw, 50px);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  animation-delay: 6s;
+}
+
+.heart {
+  display: inline-block;
+  animation: pulse 1.5s infinite;
+}
+
+/* Virág */
+.flower {
+  position: relative;
+  width: min(200px, 80vw);
+  height: 400px;
+  margin: auto;
+}
+
+.stem {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 8px;
+  height: 0;
+  background: linear-gradient(#1faa1f, #0b5d0b);
+  transform: translateX(-50%);
+  border-radius: 4px;
+  animation: growStem 3s forwards;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  width: 70px;
+  height: 35px;
+  background: #2db92d;
+  border-radius: 50%;
+  top: 220px;
+  opacity: 0;
+  animation: showLeaf 1s forwards;
+  animation-delay: 2.5s;
+}
+
+.leaf.left {
+  left: 50px;
+  transform: rotate(-30deg);
+}
+
+.leaf.right {
+  right: 50px;
+  transform: rotate(30deg);
+}
+
+/* Szirmok */
+.petals {
+  position: absolute;
+  bottom: 252px;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.5);
+  opacity: 0;
+  animation: bloom 1.5s forwards;
+  animation-delay: 3s;
+  z-index: 2;
+}
+.petals::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #0b5d0b; /* szár színe */
+  border-radius: 50%;
+  transform: translate(-50%, 20px);
+  z-index: 0;
+}
+
+
+.petal {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: pink;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform-origin: center bottom;
+}
+
+.p1 { transform: translate(-50%, -100%) rotate(0deg); }
+.p2 { transform: translate(-50%, -100%) rotate(90deg); }
+.p3 { transform: translate(-50%, -100%) rotate(180deg); }
+.p4 { transform: translate(-50%, -100%) rotate(270deg); }
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background: radial-gradient(circle, #ff85c1, #ff4fa3);
+  box-shadow: 0 0 10px rgba(255, 100, 160, 0.6);
+
+}
+
+.stem::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: #0b5d0b;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* Hulló szirmok */
+.falling-petal {
+  position: absolute;
+  top: -50px;
+  width: 20px;
+  height: 20px;
+  background: pink;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+/* Animációk */
+@keyframes growStem {
+  to { height: 260px; }
+}
+
+@keyframes bloom {
+  to { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes showLeaf {
+  to { opacity: 1; }
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* Mobilbarát */
+@media (max-width: 600px) {
+  .text {
+    font-size: 22px;
+  }
+
+  .flower {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 600px) {
+  .flower {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 360px) {
+  .flower {
+    transform: scale(0.8);
+  }
+}
