@@ -1,121 +1,156 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security.Policy;
+using System.Runtime.InteropServices;
+using System.Threading;
 
-namespace konyvkiadas
+namespace Foci
 {
     internal class Program
     {
-        class Kiadas
+        class Merkozes
         {
-            public int Ev { get; set; }
-            public int NegyedEv { get; set; }
-            public string Eredet { get; set; }
-            public string Leiras { get; set; }
-            public int Peldany { get; set; }
+            public int Fordulo { get; set; }
+            public int HG {  get; set; }
+            public int VG { get; set; }
 
-            public Kiadas(string sor)
+            //hazai feledeju golok
+            public int HFG { get; set; }
+
+            //vendeg felefeju golok
+            public int VFG { get; set; }
+            public string Hazai {  get; set; }
+            public string Vendeg { get; set; }
+
+            public Merkozes(string sor)
             {
-                string[] darabok = sor.Split(';');
-                Ev = int.Parse(darabok[0]);
-                NegyedEv = int.Parse(darabok[1]);
-                Eredet = darabok[2];
-                Leiras = darabok[3];
-                Peldany = int.Parse(darabok[4]);
+                string[] darabok = sor.Split(' ');
+                Fordulo = int.Parse(darabok[0]);
+                HG = int.Parse(darabok[1]);
+                VG = int.Parse(darabok[2]);
+                HFG = int.Parse(darabok[3]);
+                VFG = int.Parse(darabok[4]);
+                Hazai = darabok[5];
+                Vendeg = darabok[6];
             }
-
-            public void KiIr()
-            {
-                Console.WriteLine($"|{Ev}|{NegyedEv}|{Eredet}|{Leiras}|{Peldany}|");
-            }
-
-        }            
+        }
         static void Main(string[] args)
         {
-            List<Kiadas> kiadasok = new List<Kiadas>();
-            string[] sorok = File.ReadAllLines("kiadas.txt");
-            for (int i = 0; i < sorok.Length; i++)
+            string[] sorok = File.ReadAllLines("meccs.txt");
+            List<Merkozes> merkozesek = new List<Merkozes>();
+
+            for(int i = 1; i < sorok.Length; i++)
             {
-                Kiadas k = new Kiadas(sorok[i]);
-                kiadasok.Add(k);
+                Merkozes m = new Merkozes(sorok[i]);
+                merkozesek.Add(m);
             }
-
-            Console.WriteLine("Írja be a szerző nevét: ");
-            string szerzo = Console.ReadLine();
-
-            int db = 0;
-
-            foreach (var k in kiadasok)
+            #region "2. feladat"
+            Console.Write("Írja be egy forduló számát: ");
+            int ford = int.Parse(Console.ReadLine());
+            foreach (var m in merkozesek)
             {
-                if (k.Leiras.Contains(szerzo))
+                if(m.Fordulo == ford)
                 {
-                    db++;
+                    Console.WriteLine($"{m.Hazai} - {m.Vendeg}: {m.HG} - {m.VG} ({m.HFG}-{m.VFG})");
                 }
             }
-
-            if(db == 0)
+            #region 3. feladat
+            foreach (var m in merkozesek)
             {
-                Console.WriteLine("Nincs ilyen nevű szerző!");
-            }
-            else
-            {
-                Console.WriteLine($"{db} könyvkiadás");
-            }
-
-            Kiadas max = kiadasok[0];
-
-            foreach (var k in kiadasok)
-            {
-                if(k.Peldany > max.Peldany)
+                if(m.HG > m.VG && m.HFG < m.VFG)
                 {
-                    max = k;
+                    Console.WriteLine($"{m.Fordulo} {m.Hazai}");
+                }
+                if (m.HG < m.VG && m.HFG > m.VFG)
+                {
+                    Console.WriteLine($"{m.Fordulo} {m.Vendeg}");
                 }
             }
-
-            Console.WriteLine("A legnagyobb példányú könyv: ");
-            max.KiIr();
-
-            HashSet<int> evek = new HashSet<int>();
-
-            foreach (var k in kiadasok)
+            for(int i = 0; i < sorok.Length; i++)
             {
-                evek.Add(k.Ev);
+                Merkozes m = new Merkozes(sorok[i]);
+                merkozesek.Add(m);
             }
 
-            Console.WriteLine("Év|Darab|Példány");
-            Console.WriteLine("__|_____|_______");
+            #endregion
 
-            foreach (var e in evek)
+            Console.WriteLine("Írja be egy csapat nevét: ");
+            string csapat = Console.ReadLine();
+
+            #region 5. feladat
+            int lott = 0;
+            int kapott = 0;
+
+            foreach (var m in merkozesek)
             {
-                db = 0;
-                int pld = 0;
-                foreach (var k in kiadasok)
+                if(m.Hazai == csapat)
                 {
-                    if(k.Ev == e)
+                    lott += m.VG;
+                    kapott += m.HG;
+                }
+            }
+            Console.WriteLine($"Lőtt gólok: {lott}, kapott gólok: {kapott}");
+
+            #endregion
+
+            bool veretlen = true;
+            foreach (var m in merkozesek)
+            {
+                if(m.Hazai == csapat && m.HG < m.VG)
+                {
+                    Console.WriteLine($"A csapat először a {m.Vendeg}-től kapott ki, a {m.Fordulo}-ban.");
+                    veretlen = false;
+                    break;
+                }
+            }
+            if(veretlen == true)
+            {
+                Console.WriteLine("A csapat otthon veretlen maradt.");
+            }
+
+            #endregion
+
+            #region 7. feladat
+            List<string> eredmenyek = new List<string>();
+            HashSet<string> kulonbozok = new HashSet<string>();
+
+            foreach (var m in merkozesek)
+            {
+                string eredmeny = "";
+                if(m.HG > m.VG)
+                {
+                    eredmeny += m.HG + "-" + m.VG;
+                }
+                else
+                {
+                    eredmeny += m.VG + "-" + m.HG;
+                }
+
+                eredmenyek.Add(eredmeny);
+                kulonbozok.Add(eredmeny);
+            }
+
+            StreamWriter sw = new StreamWriter("stat.txt");
+            foreach (var k in kulonbozok)
+            {
+                sw.Write($"{k}:");
+                int db = 0;
+                foreach (var e in eredmenyek)
+                {
+                    if (k == e)
                     {
-                        db++;
-                        pld += k.Peldany;
+                      db ++;  
                     }
                 }
-
-                Console.WriteLine($"{e}|{db,-5}|{pld}");
-            }
-
-            StreamWriter sw = new StreamWriter("leiner.md", false, Encoding.UTF8);
-            sw.WriteLine("|Év|Könyv|Példány|");
-            sw.WriteLine("|:---:|:---|---:|");
-            foreach (var k in kiadasok)
-            {
-                if (k.Leiras.Contains("Leiner Laura"))
-                {
-                    sw.WriteLine($"|{k.Ev}|{k.Leiras}|{k.Peldany}|");
-                }
+                sw.WriteLine($"{db} darab");
             }
             sw.Close();
+            #endregion
         }
+
     }
 }
