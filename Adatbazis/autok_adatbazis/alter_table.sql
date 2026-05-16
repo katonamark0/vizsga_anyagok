@@ -1,0 +1,32 @@
+ALTER TABLE brands
+ADD COLUMN website VARCHAR(100) COMMENT 'Hivatalos weboldal';
+
+ALTER TABLE cars
+ADD COLUMN doors TINYINT DEFAULT 5 COMMENT 'Ajtók száma';
+
+ALTER TABLE cars
+MODIFY COLUMN license_plate VARCHAR(15) NOT NULL;
+
+ALTER TABLE cars
+MODIFY COLUMN mileage INT DEFAULT 0 COMMENT 'Futott km';
+
+ALTER TABLE brands
+MODIFY COLUMN founded_year INT NOT NULL COMMENT 'Alapítás éve';
+
+ALTER TABLE brands
+ADD CONSTRAINT uq_brands_name UNIQUE (name);
+
+ALTER TABLE models
+ADD COLUMN active BOOLEAN DEFAULT TRUE COMMENT 'Aktív gyártás';
+
+ALTER TABLE cars
+CHANGE COLUMN horsepower power INT COMMENT 'Teljesítmény (LE)';
+
+
+ALTER TABLE cars
+DROP COLUMN doors;
+
+
+ALTER TABLE cars
+ADD COLUMN vin VARCHAR(17) COMMENT 'Alvázszám',
+ADD COLUMN owner VARCHAR(100) COMMENT 'Tulajdonos neve';
