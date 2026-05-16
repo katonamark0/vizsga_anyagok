@@ -1,0 +1,106 @@
+body{
+    background-color: deepskyblue;
+    background-image: url(images/bg.jpg);
+    background-size: cover;
+    font-family: helvetica;
+    font-family: 'Times New Roman', Times, serif; 
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+    width: 1200px;
+    grid-template-areas:
+    "header header"
+    "aside content"
+    "footer footer";
+    margin: auto;
+    place-content: center;
+    border-radius: 20px;
+    height: 900px;
+}
+
+.header {
+    grid-column: span 4 / span 4;
+    background-color: rgb(90, 26, 0);
+    color: rgb(255, 196, 0);
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.aside {
+    grid-row: span 3 / span 3;
+    grid-row-start: 2;
+        background-color: rgb(90, 26, 0);
+    color: rgb(255, 196, 0);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+main {
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 3;
+    grid-row-start: 2;
+    background-color: rgb(90, 26, 0);
+    color: rgb(255, 196, 0);
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.footer {
+    grid-column: span 4 / span 4;
+    grid-row-start: 5;
+            background-color: rgb(90, 26, 0);
+    color: rgb(255, 196, 0);
+    border-radius: 10px;
+    height: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 30%;
+    border-radius: 5px;
+    background-color: rgb(124, 35, 0);
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: rgb(156, 44, 0);
+    color:white;
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+#cim{
+    text-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    font-size: 75px; 
+    font-weight: normal; 
+    margin-top: 1; 
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+a{
+    color: rgb(255, 196, 0);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover{
+    color:white;
+}

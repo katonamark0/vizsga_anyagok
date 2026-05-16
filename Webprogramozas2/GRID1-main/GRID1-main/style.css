@@ -1,0 +1,99 @@
+.grid-layout {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "aside content"
+    "footer footer";
+  grid-template-columns: 1fr 4fr;
+  gap: 3px;
+  background-color: darkgray;
+  padding: 5px;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body{
+    background-color: darkgray;
+}
+
+
+.box{
+    background: url(hatter.webp);
+    border-radius: 10px;
+    background-size: cover;
+}
+
+
+.header {
+  grid-area: header;
+  text-align: center;
+}
+
+.aside{
+    grid-area: aside;
+}
+
+.content{
+    grid-area: content;
+    overflow: hidden;
+    background-size: cover;
+}
+
+figure img {
+    width: 100%;
+    max-width: 400px;
+}
+
+.footer{
+    grid-area: footer;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .grid-layout{
+        grid-template-areas:
+        "header"
+        "aside"
+        "content"
+        "footer";
+        grid-template-columns: 1fr;
+    }
+}
+
+.kozep{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 10px;
+    border: 5px solid darkgray;
+}
+
+ul{
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+
+.dolt{
+    font-style: oblique;
+}
+
+
+h3{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.alcim{
+    text-align: center;
+    font-style: oblique;
+    font-size: large;
+}
